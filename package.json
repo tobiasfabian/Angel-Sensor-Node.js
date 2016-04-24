@@ -1,0 +1,26 @@
+{
+  "author": {
+    "name": "Tobias Wolf",
+    "email": "hello@tobiaswolf.me"
+  },
+  "license": "MIT",
+  "name": "angel_sensor_nodejs",
+  "description": "A Node.js library for Angel Sensor (M1).",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tobiasfabian/angel_sensor_nodejs.git"
+  },
+  "keywords": [
+    "Angel Sensor",
+    "Angel Sensor M1",
+    "health devices",
+    "Heart Rate",
+    "Bluetooth Low Energy"
+  ],
+  "main": "./index.js",
+  "dependencies": {
+    "noble": "~1.3.0"
+  },
+  "homepage": "https://github.com/tobiasfabian/angel_sensor_nodejs"
+}
