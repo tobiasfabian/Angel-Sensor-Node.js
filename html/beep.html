@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <title>LEDs and Acceleration of Angel Sensor M1</title>
+  <style>
+    .bg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg">
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+    var bgElement = document.querySelector('.bg');
+    socket.on('beep', function(){
+      bgElement.style.backgroundColor = '#fff';
+      setTimeout(function(){
+        bgElement.style.backgroundColor = null;
+      }, 20);
+    });
+  </script>
+</body>
+</html>

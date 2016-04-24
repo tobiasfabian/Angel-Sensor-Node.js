@@ -27,6 +27,10 @@ function opticalWaveform(characteristic) {
       var green = data[i-5] + data[i-4]*256 + data[i-3]*256*256;
       var blue  = data[i-2] + data[i-1]*256 + data[i]*256*256;
       // console.log(green + ', ' + blue)
+      if (SOCKET) {
+        SOCKET.emit('green', green);
+        SOCKET.emit('blue', blue);
+      }
     }
 
   });

@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+  <title>LEDs and Acceleration of Angel Sensor M1</title>
+  <style>
+    body {
+      margin: 0;
+    }
+    canvas {
+      margin: 5px 0;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="green"></canvas>
+  <canvas id="blue"></canvas>
+  <canvas id="acceleration"></canvas>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/smothie.js"></script>
+  <script>
+    var smoothieSetting = {
+      millisPerPixel: 2
+    };
+
+    var greenElement = document.getElementById('green');
+    greenElement.height = window.innerHeight * 0.4 - 5;
+    greenElement.width = window.innerWidth;
+
+    var blueElement = document.getElementById('blue');
+    blueElement.height = window.innerHeight * 0.4 - 5;
+    blueElement.width = window.innerWidth;
+
+    var accelerationElement = document.getElementById('acceleration');
+    accelerationElement.height = window.innerHeight * 0.2 - 5;
+    accelerationElement.width = window.innerWidth;
+
+    var greenSmoothie = new SmoothieChart(smoothieSetting);
+    greenSmoothie.streamTo(greenElement);
+    var greenLED = new TimeSeries();
+    greenSmoothie.addTimeSeries(greenLED, {
+      strokeStyle:'rgb(0, 255, 0)', lineWidth: 2
+    });
+
+    var blueSmoothie = new SmoothieChart(smoothieSetting);
+    blueSmoothie.streamTo(blueElement);
+    var blueLED  = new TimeSeries();
+    blueSmoothie.addTimeSeries(blueLED, {
+      strokeStyle:'rgb(0, 0, 255)', lineWidth: 2
+    });
+
+    // var accelerationSmoothie = new SmoothieChart(smoothieSetting);
+    // accelerationSmoothie.streamTo(accelerationElement);
+    // var acceleration = new TimeSeries();
+    // accelerationSmoothie.addTimeSeries(acceleration, {
+    //   strokeStyle:'rgb(255, 0, 0)', lineWidth: 2
+    // });
+
+    var socket = io();
+    socket.on('green', function(data){
+      greenLED.append(new Date().getTime(), data);
+    });
+    socket.on('blue', function(data){
+      blueLED.append(new Date().getTime(), data);
+    });
+    // socket.on('acceleration', function(data){
+    //   acceleration.append(new Date().getTime(), data);
+    // });
+  </script>
+</body>
+</html>
