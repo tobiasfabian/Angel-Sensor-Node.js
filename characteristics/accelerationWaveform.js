@@ -8,25 +8,13 @@ This characteristic represents the acceleration energy magnitude registered by t
 http://angelsensor.com/protocols/seraphim-sense/activity-monitoring-service/
 */
 
-var prependFile = require('prepend-file');
-
-
 function accelerationWaveform(characteristic) {
 
   characteristic.on('read', function(data, isNotification) {
+    if (data.length >= 3) {
+      var wave = data[0] + (data[1] << 8) + (data[2] << 16);
 
-    // Code from  https://github.com/AngelSensor/angel-sdk/blob/86f2d7d7317bcf3991a67e1dbb0d2aefba05b79f/Android/angel-sdk/src/main/java/com/angel/sdk/ChAccelerationWaveform.java
-
-    var sampleSize = 3;
-    for (var i = sampleSize - 1; i < data.length; i += sampleSize) {
-      var wave  = data[i-2] + data[i-1]*256 + data[i]*256*256;
-      prependFile('data.txt', wave + '\n', function(err) {
-        if (err) {
-          console.log('Unable to write waveform');
-        }
-        // Success 
-        //console.log('The "data to prepend" was prepended to file!');
-      });
+      //console.log(wave);
     }
   });
 
