@@ -12,7 +12,7 @@ function accelerationWaveform(characteristic) {
       var y = data[2] + data[3] * 255;
       var z = data[4] + data[5] * 255;
 
-      console.log(x + ' ' + y + ' ' + z);
+      //console.log(x + ' ' + y + ' ' + z);
     }
 
   });
