@@ -16,6 +16,7 @@ http://angelsensor.com/protocols/seraphim-sense/waveform-signal-service/
 
 var opticalWaveformCharacteristic = require('../characteristics/opticalWaveform.js');
 var accelerationWaveformCharacteristic = require('../characteristics/accelerationWaveform.js');
+var gyroscopeWaveformCharacteristic = require('../characteristics/gyroscopeWaveform.js');
 var waveformSignalFeatureCharacteristic = require('../characteristics/waveformSignalFeature.js');
 var protocolRevisionCharacteristic = require('../characteristics/protocolRevision.js');
 
@@ -45,7 +46,7 @@ function waveformSignalService(service) {
           protocolRevisionCharacteristic(characteristic, service);
           break;
         case '5df14ec3fed1442883bf28ade00b0d98':
-          console.log('<<<<<<<<<<<<<<<  GYRO >>>>>>>>>>>>>>');
+          gyroscopeWaveformCharacteristic(characteristic);
           break;
       }
 
