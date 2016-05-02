@@ -6,6 +6,7 @@ var batteryService = require('./services/battery.js');
 var deviceInformationService = require('./services/deviceInformation.js');
 var waveformSignalService = require('./services/waveformSignal.js');
 var bloodOxygenSaturationService = require('./services/bloodOxygenSaturation.js');
+var activityMonitoringService = require('./services/activityMonitoring.js');
 
 
 
@@ -24,7 +25,7 @@ noble.on('discover', function(peripheral) {
 
   // console.log(peripheral.advertisement.localName);
 
-  if (peripheral.advertisement.localName.indexOf('Angel Sensor') > -1) {
+  if (peripheral.advertisement.localName && peripheral.advertisement.localName.indexOf('Angel Sensor') > -1) {
 
     angelSensor = peripheral;
     console.log('connected to ' + angelSensor.advertisement.localName);
@@ -34,7 +35,6 @@ noble.on('discover', function(peripheral) {
     angelSensor.connect(function(error) {
 
       angelSensor.discoverServices(null, function(error, services) {
-
         for (var i in services) {
           var service = services[i];
           var serviceUuid = service.uuid;
@@ -56,6 +56,9 @@ noble.on('discover', function(peripheral) {
               break;
             case '902dcf38ccc04902b22c70cab5ee5df2':
               bloodOxygenSaturationService(service);
+              break;
+            case '68b527384a0440e18f83337a29c3284d':
+              activityMonitoringService(service);
               break;
           }
         }

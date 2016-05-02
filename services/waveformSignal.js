@@ -31,7 +31,6 @@ function waveformSignalService(service) {
     for (var i in characteristics) {
 
       var characteristic = characteristics[i];
-
       switch(characteristic.uuid) {
         case '334c0be876f9458bbb2e7df2b486b4d7':
           opticalWaveformCharacteristic(characteristic);
@@ -44,6 +43,9 @@ function waveformSignalService(service) {
           break;
         case '3b8e7983133a4a0f90fc82006ed55505':
           protocolRevisionCharacteristic(characteristic, service);
+          break;
+        case '5df14ec3fed1442883bf28ade00b0d98':
+          console.log('<<<<<<<<<<<<<<<  GYRO >>>>>>>>>>>>>>');
           break;
       }
 
